@@ -1,0 +1,18 @@
+add 1 admin adminiam
+add 1 ali razavi
+deposit  1 10000
+sell 1 RENA1 130 40 GTC
+buy 1 RENA1 130 40 MPO
+sell 2 RENA1 130 40 MPO
+add 2 ali razavi
+sell 2 RENA1 150 80 GTC
+sell 2 SAIPA 100 50 GTC
+sell 1 SAIPA 100 50 GTC
+buy 2 SAIPA 150 90 GTC
+deposit 2 3000
+buy 2 SAIPA 150 20 GTC
+deposit 2 100000
+buy 2 RENA1 200 100 GTC
+sell 1 RENA1 190 45 GTC
+sell 2 RENA1 20 1 IOC
+buy 2 SAIPA 1000 8 IOC

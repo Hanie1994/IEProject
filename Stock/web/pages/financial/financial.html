@@ -1,0 +1,20 @@
+<div>
+    <div class="container-fluid">
+        <div class="row myMargin">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div ng-include="'pages/common/navbar.html'"></div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div ng-include="'pages/common/header.html'"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div ng-show="isActive('PersonalInfo')" ng-include="'pages/common/PersonalInfo.html'"></div>
+                        <div ng-show="isActive('ManageCreditRequests')" ng-include="'pages/financial/ManageCreditRequests.html'"></div>
+                        <div ng-show="isActive('ManageLimitedOrders')" ng-include="'pages/financial/ManageLimitedOrders.html'"></div>
+                        <div ng-show="isActive('MarketInfo')" ng-include="'pages/common/MarketInfo.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

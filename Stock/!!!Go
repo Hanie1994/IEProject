@@ -1,0 +1,5 @@
+./build
+./deploy
+./db
+./tomcat
+http://localhost:8080/ca8/Main.html

@@ -1,0 +1,26 @@
+<table class="table table-hover table-condensed">
+    <caption class="bg-info">نمادهای منتظر تایید: {{ pendingSymbols.length }}</caption>
+    <thead>
+    <tr>
+        <th>ردیف</th>
+        <th>نماد</th>
+        <th>شرکت</th>
+        <th>مرجع</th>
+        <th>تایید</th>
+        <th>رد</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr ng-repeat="r in pendingSymbols">
+        <td>{{ $index+1 }}</td>
+        <td>{{ r.name }}</td>
+        <td>{{ r.company }}</td>
+        <td>{{ r.sid }}</td>
+        <td ng-click="verifyPendingSymbol(r.name )"><a class="fa fa-check"></a></td>
+        <td ng-click="rejectPendingSymbol(r.name )"><a class="fa fa-close"></a></td>
+    </tr>
+    </tbody>
+</table>

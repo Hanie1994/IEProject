@@ -1,0 +1,36 @@
+<table class="table table-hover table-condensed">
+    <caption class="bg-info">تعداد سفارش های محدود شده منتظر تایید: {{ allLimitedOrders.length }}</caption>
+    <thead>
+    <tr>
+        <th>ردیف</th>
+        <th>نماد</th>
+        <th>قیمت</th>
+        <th>تعداد اولیه</th>
+        <th>تعداد باقیمانده</th>
+        <th>عملیات</th>
+        <th>نوع</th>
+        <th>مرجع</th>
+        <th>وضعیت</th>
+        <th>تایید</th>
+        <th>رد</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr ng-repeat="r in allLimitedOrders">
+        <td>{{ $index+1 }}</td>
+        <td>{{ r.symbol }}</td>
+        <td>{{ r.price }}</td>
+        <td>{{ r.initQuantity }}</td>
+        <td>{{ r.remainingQuantity }}</td>
+        <td>{{ r.operation }}</td>
+        <td>{{ r.type }}</td>
+        <td>{{ r.oid }}</td>
+        <td>{{ r.status }}</td>
+        <td ng-click="acceptLimitedOrder(r.crid)"><a class="fa fa-check"></a></td>
+        <td ng-click="rejectLimitedOrder(r.crid)"><a class="fa fa-close"></a></td>
+    </tr>
+    </tbody>
+</table>

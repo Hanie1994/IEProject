@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default sidebar">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand logo" id="pcLogo">
+            <img src="images/logo.png"></a>
+        <a class="navbar-brand logo" id="MobileLogo">
+            <img src="images/logo.png"></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller="menuCtrl">
+        <ul class="nav navbar-nav" id="usermenu">
+
+            <li ng-repeat="item in menu" ng-class="{ active: isActive($index) }" id="item.id " data-ng-click="">
+                <a href="" data-ng-click="goToPage($index)">
+                    <img ng-src="{{ item.image }}">
+                {{ item.name }}
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+</nav>

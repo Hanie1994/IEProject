@@ -1,0 +1,13 @@
+add 1 admin adminiam
+deposit  1 10000
+add 2 ali razavi
+deposit 2 100000
+add 3 akbar ghassab
+deposit 3 30000
+
+sell 1 RENA1 100 50 GTC
+sell 1 RENA1 200 40 GTC
+sell 1 SAIPA 500 60 GTC
+sell 1 SAIPA 400 70 GTC
+
+buy 2 RENA1 0 150 MPO

@@ -1,0 +1,66 @@
+<div class="col-md-3 col-sm-3">
+
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 150px; padding: 20px; background-color: #122b40">
+
+    <ul class="tab-group">
+        <li class="tab"><a href="#login">ورود</a></li>
+        <li class="tab active"><a href="#signup">عضویت</a></li>
+    </ul>
+
+
+    <div class="tab-content">
+        <div id="signup">
+
+            <form>
+                <div class="field-wrap">
+                    <input ng-model="user" type="text" required autocomplete="off" placeholder="شناسه کاربری" />
+                </div>
+
+                <div class="field-wrap">
+                    <input ng-model="name" type="text" required autocomplete="off" placeholder="نام" />
+                </div>
+
+                <div class="field-wrap">
+                    <input ng-model="family" type="text"required autocomplete="off" placeholder="نام خانوادگی"/>
+                </div>
+
+
+                <div class="field-wrap">
+                    <input ng-model="email" type="email"required autocomplete="off" placeholder="ایمیل"/>
+                </div>
+
+                <div class="field-wrap">
+                    <input ng-model="pass" type="password"required autocomplete="off" placeholder="گذرواژه"/>
+                </div>
+
+                <div class="field-wrap">
+                    <input ng-model="repeat" type="password"required autocomplete="off" placeholder="تکرار گذرواژه"/>
+                </div>
+                <button ng-click="doSignup(user, name, family, email, pass, repeat)" class="button button-block"/>ثبت</button>
+
+            </form>
+
+        </div>
+
+        <div id="login">
+
+            <form>
+
+                <div class="field-wrap">
+                    <input ng-model="username" type="text"required autocomplete="off" placeholder="شناسه کاربری" size="50"/>
+                </div>
+
+                <div class="field-wrap">
+                    <input ng-model="password" type="password"required autocomplete="off" placeholder="گذرواژه" size="50"/>
+                </div>
+
+                <button ng-click="doLogin(username, password)" class="button button-block"/>ثبت</button>
+
+            </form>
+
+        </div>
+
+    </div><!-- tab-content -->
+
+</div>

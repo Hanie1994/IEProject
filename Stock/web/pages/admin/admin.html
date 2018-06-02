@@ -1,0 +1,35 @@
+<div>
+    <div class="container-fluid">
+        <div class="row myMargin">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div ng-include="'pages/common/navbar.html'"></div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div ng-include="'pages/common/header.html'"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div ng-show="isActive('PersonalInfo')" ng-include="'pages/common/PersonalInfo.html'"></div>
+                    <div ng-show="isActive('Orders')" ng-include="'pages/common/Orders.html'"></div>
+                    <div ng-show="isActive('MarketInfo')" ng-include="'pages/common/MarketInfo.html'"></div>
+                    <div ng-show="isActive('ShareBasket')" ng-include="'pages/common/ShareBasket.html'"></div>
+                    <div ng-show="isActive('SymbolList')" ng-include="'pages/common/SymbolList.html'"></div>
+                    <div ng-show="isActive('Credits')" ng-include="'pages/common/Credits.html'"></div>
+
+                    <div ng-show="isActive('Reports')" ng-include="'pages/admin/Filter.html'"></div>
+                    <div ng-show="isActive('ChangeLimit')" ng-include="'pages/admin/ChangeOrderLimit.html'"></div>
+                    <div ng-show="isActive('CustomersList')" ng-include="'pages/admin/CustomersList.html'"></div>
+                    <div ng-show="isActive('AddRole')" ng-include="'pages/admin/AddRole.html'"></div>
+                    <div ng-show="isActive('PendingSymbols')" ng-include="'pages/admin/PendingSymbols.html'"></div>
+
+                    <div ng-show="isActive('ManageCreditRequests')" ng-include="'pages/financial/ManageCreditRequests.html'"></div>
+                    <div ng-show="isActive('ManageLimitedOrders')" ng-include="'pages/financial/ManageLimitedOrders.html'"></div>
+
+                    <div ng-show="isActive('AddSymbol')" ng-include="'pages/company/AddSymbol.html'"></div>
+                    <div ng-show="isActive('CompanySymbolList')" ng-include="'pages/company/CompanySymbolList.html'"></div>
+                    <div ng-show="isActive('ChargeSymbol')" ng-include="'pages/company/ChargeSymbol.html'"></div>
+                </div>
+            </div>
+            <div ng-include="'pages/common/SymbolInfoModal.html'"></div>
+        </div>
+    </div>
+</div>
+</div>

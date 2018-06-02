@@ -1,0 +1,75 @@
+<div class="row">
+<form role="form">
+    <div class="form-horizontal" role="form">
+        <div>
+            <p>جستجو بر اساس :</p>
+            <input type="checkbox" ng-model="checkedPR">قیمت معامله
+            <label><input  type="text" ng-disabled="!checkedPR" placeholder="حداکثر" size="20" ng-model="maxPrice">
+                <input  type="text" ng-disabled="!checkedPR" placeholder="حداقل" size="20" ng-model="minPrice"></label>
+        </div>
+        <div>
+            <input type="checkbox" ng-model="checkedID">شماره ملی
+            <label><input  type="text" ng-disabled="!checkedID" placeholder="..." size="3" ng-model="IdNum"></label>
+        </div>
+        <div>
+            <input type="checkbox" ng-model="checkedUN">نام کاربری
+            <label><input  type="text" ng-disabled="!checkedUN" placeholder="..." size="3" ng-model="UnameSerach"></label>
+        </div>
+        <div>
+            <input type="checkbox" ng-model="checkedSB">نماد
+            <label><input  type="text" ng-disabled="!checkedSB" placeholder="..." size="3" ng-model="symbolSearch"></label>
+        </div>
+        <div class="datefield">
+            <p><input type="checkbox" ng-model="checkedDate">از تاریخ
+                <input type="tel" ng-disabled="!checkedDate" size="2" maxlength="2" placeholder="DD" ng-model="DD1" /> /
+                <input type="tel" ng-disabled="!checkedDate" size="2" maxlength="2" placeholder="MM" ng-model="MM1" />/
+                <input type="tel" ng-disabled="!checkedDate" size="4" maxlength="4" placeholder="YYYY" ng-model="YY1" /></p>
+
+            <p><input type="checkbox" ng-model="checkedDate2">تا تاریخ
+                <input type="tel" ng-disabled="!checkedDate2" size="2" maxlength="2" placeholder="DD" ng-model="DD2" /> /
+                <input type="tel" ng-disabled="!checkedDate2" size="2" maxlength="2" placeholder="MM" ng-model="MM2" />/
+                <input type="tel" ng-disabled="!checkedDate2" size="4" maxlength="4" placeholder="YYYY" ng-model="YY2" />
+            </p>
+        </div>
+        <button type="submit" class="btn btn-success " ng-click="search(checkedPR, checkedID, checkedUN, checkedSB, checkedDate, checkedDate2)">بگرد</button>
+    </div>
+</form>
+</div>
+<table class="table table-hover table-condensed">
+
+    <caption class="bg-success">تعداد تراکنش بازیابی شده: {{ filteredExchanges.length }}</caption>
+
+    <thead>
+    <tr>
+        <th>ردیف</th>
+        <th>فروشنده</th>
+        <th>خریدار</th>
+        <th>نماد</th>
+        <th>قیمت فروش</th>
+        <th>قیمت خرید</th>
+        <th>تعداد</th>
+        <th>تاریخ</th>
+        <th>مرجع فروش</th>
+        <th>مرجع خرید</th>
+        <th>مرجع تراکنش</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr ng-repeat="r in filteredExchanges">
+        <td>{{ $index+1 }}</td>
+        <td>{{ r.sellerId }}</td>
+        <td>{{ r.buyerId }}</td>
+        <td>{{ r.symbol }}</td>
+        <td>{{ r.sellPrice }}</td>
+        <td>{{ r.buyPrice }}</td>
+        <td>{{ r.quantity }}</td>
+        <td>{{ dater(r.exchangeDate) }}</td>
+        <td>{{ r.sellRef }}</td>
+        <td>{{ r.buyRef }}</td>
+        <td>{{ r.eid }}</td>
+    </tr>
+    </tbody>
+</table>

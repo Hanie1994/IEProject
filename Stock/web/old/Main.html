@@ -1,0 +1,538 @@
+<html ng-app="myApp" ng-controller="mainCtrl" ng-init="init()">
+<script src="js/angular.min.js"></script>
+<script src="js/app.js"></script>
+<title>{{ pageTitle }}</title>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+
+<body>
+    <div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div ng-include="'include/navbar.html'"></div>
+
+                    <!--    <form role="form">
+                    <div>
+                        <p>جستجو بر اساس :</p>
+                        <input type="checkbox" ng-model="checked">قیمت معامله
+                        <label><input  type="text" ng-disabled="!checked" placeholder="حداکثر" size="3" ng-model="maxPrice">
+                        <input  type="text" ng-disabled="!checked" placeholder="حداقل" size="3" ng-model="minPrice"></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" ng-model="checkedID">شماره ملی
+                        <label><input  type="text" ng-disabled="!checkedID" placeholder="..." size="3" ng-model="IdNum"></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" ng-model="checkedUN">نام کاربری
+                        <label><input  type="text" ng-disabled="!checkedUN" placeholder="..." size="3" ng-model="UnameSerach"></label>
+                    </div>
+                    <div>
+                        <input type="checkbox" ng-model="checkedSB">نماد
+                        <label><input  type="text" ng-disabled="!checkedSB" placeholder="..." size="3" ng-model="symbolSearch"></label>
+                    </div>
+                    <div class="datefield">
+                        <p><input type="checkbox" ng-model="checkedDate">از تاریخ
+                        <input type="tel" ng-disabled="!checkedDate" size="2" maxlength="2" placeholder="DD" ng-model="DD1" /> /              
+                        <input type="tel" ng-disabled="!checkedDate" size="2"  maxlength="2" placeholder="MM" ng-model="MM1" />/
+                        <input type="tel" ng-disabled="!checkedDate" size="4" maxlength="4" placeholder="YYYY" ng-model="YY1" /></p>
+
+                        <p><input type="checkbox" ng-model="checkedDate2">تا تاریخ
+                        <input type="tel" ng-disabled="!checkedDate2" size="2" maxlength="2" placeholder="DD" ng-model="DD2"/>
+                            /              
+                        <input type="tel" ng-disabled="!checkedDate2" size="2"  maxlength="2" placeholder="MM" ng-model="MM2"/>/
+                        <input type="tel" ng-disabled="!checkedDate2" size="4" maxlength="4" placeholder="YYYY" ng-model="YY2"/>
+                        </p> 
+                    </div>
+                    <button type="submit" class="btn btn-success " ng-click="search()">Search</button>
+                </form>  -->
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div ng-include="'include/header.html'"></div>
+                    <div class="row">
+                        <!-- <button class="btn btn-warning" ng-click="loadSampleData()">Load</button>
+                        <button class="btn btn-default" data-toggle="modal" data-target="#symbolModal">modal</button> -->
+                        <div>
+                            Name: <input ng-model="customerId">
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="status" ng-controller="symbolCtrl" ng-show="true">
+                                <span>لیست نماد ها</span>
+                                <table class="table table-hover table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>ردیف</th>
+                                            <th>نماد</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr ng-repeat="x in symbolList | orderBy" ng-click="setSymbol(x)" data-toggle="modal" data-target="#symbolModal">
+                                            <td>{{ $index+1 }}</td>
+                                            <td>{{ x }}</td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div class="status" ng-show="true">
+                                <span>پنل کاربری</span>
+
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#tab0">اطلاعات</a></li>
+                                    <li><a data-toggle="tab" href="#tab1">فعال</a></li>
+                                    <li><a data-toggle="tab" href="#tab2">موفق</a></li>
+                                    <li><a data-toggle="tab" href="#tab3">ناموفق</a></li>
+                                    <li><a data-toggle="tab" href="#tab4">سبد سهام</a></li>
+                                    <li><a data-toggle="tab" href="#tab5">بازار</a></li>
+                                    <li><a data-toggle="tab" href="#tab6">گزارش</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab0" class="tab-pane fade in active">
+                                        <p></p>
+                                        <ul class="list-group">
+                                            <li class="list-group-item list-group-item-danger">شناسه: {{ userInfo.id }}</li>
+                                            <li class="list-group-item list-group-item-success">بودجه: {{ userInfo.credit }}</li>
+                                            <li class="list-group-item list-group-item-info">نام: {{ userInfo.name }}</li>
+                                            <li class="list-group-item list-group-item-warning">نام خانوادگی: {{ userInfo.family }}</li>
+                                        </ul>
+                                    </div>
+                                    <div id="tab1" class="tab-pane fade">
+                                        <!-- <span class="bg-info">درخواست های فعال</span> -->
+                                        <table class="table table-hover table-condensed">
+                                            <caption class="bg-info">تعداد درخواست های فعال کاربر: {{ activeOrders.length }}</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th>ردیف</th>
+                                                    <th>نماد</th>
+                                                    <th>قیمت</th>
+                                                    <th>تعداد اولیه</th>
+                                                    <th>تعداد باقیمانده</th>
+                                                    <th>عملیات</th>
+                                                    <th>نوع</th>
+                                                    <th>مرجع</th>
+                                                    <th>وضعیت</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr ng-repeat="r in activeOrders">
+                                                    <td>{{ $index+1 }}</td>
+                                                    <td>{{ r.symbol }}</td>
+                                                    <td>{{ r.price }}</td>
+                                                    <td>{{ r.initQuantity }}</td>
+                                                    <td>{{ r.remainingQuantity }}</td>
+                                                    <td>{{ r.operation }}</td>
+                                                    <td>{{ r.type }}</td>
+                                                    <td>{{ r.oid }}</td>
+                                                    <td>{{ r.status }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="tab2" class="tab-pane fade">
+                                        <!--  <span class="bg-success">درخواست های موفق</span> -->
+                                        <table class="table table-hover table-condensed">
+
+                                            <caption class="bg-success">تعداد درخواست های موفق کاربر: {{ approvedOrders.length }}</caption>
+
+                                            <thead>
+                                                <tr>
+                                                    <th>ردیف</th>
+                                                    <th>نماد</th>
+                                                    <th>قیمت</th>
+                                                    <th>تعداد اولیه</th>
+                                                    <th>تعداد باقیمانده</th>
+                                                    <th>عملیات</th>
+                                                    <th>نوع</th>
+                                                    <th>مرجع</th>
+                                                    <th>وضعیت</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr ng-repeat="r in approvedOrders">
+                                                    <td>{{ $index+1 }}</td>
+                                                    <td>{{ r.symbol }}</td>
+                                                    <td>{{ r.price }}</td>
+                                                    <td>{{ r.initQuantity }}</td>
+                                                    <td>{{ r.remainingQuantity }}</td>
+                                                    <td>{{ r.operation }}</td>
+                                                    <td>{{ r.type }}</td>
+                                                    <td>{{ r.oid }}</td>
+                                                    <td>{{ r.status }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="tab3" class="tab-pane fade">
+                                        <!-- <span class="bg-danger">درخواست های ناموفق</span> -->
+                                        <table class="table table-hover table-condensed">
+
+                                            <caption class="bg-danger">تعداد درخواست های ناموفق کاربر: {{ declinedOrders.length }}</caption>
+
+                                            <thead>
+                                                <tr>
+                                                    <th>ردیف</th>
+                                                    <th>نماد</th>
+                                                    <th>قیمت</th>
+                                                    <th>تعداد اولیه</th>
+                                                    <th>تعداد باقیمانده</th>
+                                                    <th>عملیات</th>
+                                                    <th>نوع</th>
+                                                    <th>مرجع</th>
+                                                    <th>وضعیت</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr ng-repeat="r in declinedOrders">
+                                                    <td>{{ $index+1 }}</td>
+                                                    <td>{{ r.symbol }}</td>
+                                                    <td>{{ r.price }}</td>
+                                                    <td>{{ r.initQuantity }}</td>
+                                                    <td>{{ r.remainingQuantity }}</td>
+                                                    <td>{{ r.operation }}</td>
+                                                    <td>{{ r.type }}</td>
+                                                    <td>{{ r.oid }}</td>
+                                                    <td>{{ r.status }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="tab4" class="tab-pane fade">
+                                        <!-- <span class="bg-primary">سهام آزاد کاربر</span>-->
+                                        <table class="table table-hover table-condensed">
+
+                                            <caption class="bg-primary">سهام آزاد کاربر</caption>
+
+                                            <thead>
+                                                <tr>
+                                                    <th>ردیف</th>
+                                                    <th>نماد</th>
+                                                    <th>تعداد</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr ng-repeat="m in shareBasket">
+                                                    <td>{{ $index+1 }}</td>
+                                                    <td>{{ m.symbol }}</td>
+                                                    <td>{{ m.quantity }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="tab5" class="tab-pane fade">
+                                        <!-- <span>وضعیت بازار</span> -->
+                                        <a id="btn_Update" class="btn btn-warning" ng-click="updateMarketStatus()">به روز رسانی <i class="fa fa-refresh" ng-show="!isRefreshingMarket"></i> <i class="fa fa-refresh fa-spin" ng-show="isRefreshingMarket"></i></a>
+                                        <table class="table table-hover table-condensed">
+
+                                            <caption class="bg-success">تعداد درخواست های موجود: {{ marketActiveOrders.length }}</caption>
+
+                                            <thead>
+                                                <tr>
+                                                    <th>ردیف</th>
+                                                    <th>کاربر</th>
+                                                    <th>نماد</th>
+                                                    <th>قیمت</th>
+                                                    <th>تعداد اولیه</th>
+                                                    <th>تعداد باقیمانده</th>
+                                                    <th>عملیات</th>
+                                                    <th>نوع</th>
+                                                    <th>مرجع</th>
+                                                    <th>وضعیت</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr ng-repeat="r in marketActiveOrders | orderBy : 'symbol' ">
+                                                    <td>{{ $index+1 }}</td>
+                                                    <td>{{ r.userId }}</td>
+                                                    <td>{{ r.symbol }}</td>
+                                                    <td>{{ r.price }}</td>
+                                                    <td>{{ r.initQuantity }}</td>
+                                                    <td>{{ r.remainingQuantity }}</td>
+                                                    <td>{{ r.operation }}</td>
+                                                    <td>{{ r.type }}</td>
+                                                    <td>{{ r.oid }}</td>
+                                                    <td>{{ r.status }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="tab6" class="tab-pane fade">
+                                        <form role="form">
+                                            <div>
+                                                <p>جستجو بر اساس :</p>
+                                                <input type="checkbox" ng-model="checkedPR">قیمت معامله
+                                                <label><input  type="text" ng-disabled="!checkedPR" placeholder="حداکثر" size="20" ng-model="maxPrice">
+                            <input  type="text" ng-disabled="!checkedPR" placeholder="حداقل" size="20" ng-model="minPrice"></label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" ng-model="checkedID">شماره ملی
+                                                <label><input  type="text" ng-disabled="!checkedID" placeholder="..." size="3" ng-model="IdNum"></label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" ng-model="checkedUN">نام کاربری
+                                                <label><input  type="text" ng-disabled="!checkedUN" placeholder="..." size="3" ng-model="UnameSerach"></label>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" ng-model="checkedSB">نماد
+                                                <label><input  type="text" ng-disabled="!checkedSB" placeholder="..." size="3" ng-model="symbolSearch"></label>
+                                            </div>
+                                            <div class="datefield">
+                                                <p><input type="checkbox" ng-model="checkedDate">از تاریخ
+                                                    <input type="tel" ng-disabled="!checkedDate" size="2" maxlength="2" placeholder="DD" ng-model="DD1" /> /
+                                                    <input type="tel" ng-disabled="!checkedDate" size="2" maxlength="2" placeholder="MM" ng-model="MM1" />/
+                                                    <input type="tel" ng-disabled="!checkedDate" size="4" maxlength="4" placeholder="YYYY" ng-model="YY1" /></p>
+
+                                                <p><input type="checkbox" ng-model="checkedDate2">تا تاریخ
+                                                    <input type="tel" ng-disabled="!checkedDate2" size="2" maxlength="2" placeholder="DD" ng-model="DD2" /> /
+                                                    <input type="tel" ng-disabled="!checkedDate2" size="2" maxlength="2" placeholder="MM" ng-model="MM2" />/
+                                                    <input type="tel" ng-disabled="!checkedDate2" size="4" maxlength="4" placeholder="YYYY" ng-model="YY2" />
+                                                </p>
+                                            </div>
+                                            <button type="submit" class="btn btn-success " ng-click="search(checkedPR, checkedID, checkedUN, checkedSB, checkedDate, checkedDate2)">بگرد</button>
+                                        </form>
+                                        <table class="table table-hover table-condensed">
+
+                                            <caption class="bg-success">تعداد تراکنش بازیابی شده: {{ filteredExchanges.length }}</caption>
+
+                                            <thead>
+                                                <tr>
+                                                    <th>ردیف</th>
+                                                    <th>فروشنده</th>
+                                                    <th>خریدار</th>
+                                                    <th>نماد</th>
+                                                    <th>قیمت فروش</th>
+                                                    <th>قیمت خرید</th>
+                                                    <th>تعداد</th>
+                                                    <th>تاریخ</th>
+                                                    <th>مرجع فروش</th>
+                                                    <th>مرجع خرید</th>
+                                                    <th>مرجع تراکنش</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                <tr ng-repeat="r in filteredExchanges">
+                                                    <td>{{ $index+1 }}</td>
+                                                    <td>{{ r.sellerId }}</td>
+                                                    <td>{{ r.buyerId }}</td>
+                                                    <td>{{ r.symbol }}</td>
+                                                    <td>{{ r.sellPrice }}</td>
+                                                    <td>{{ r.buyPrice }}</td>
+                                                    <td>{{ r.quantity }}</td>
+                                                    <td>{{ dater(r.exchangeDate) }}</td>
+                                                    <td>{{ r.sellRef }}</td>
+                                                    <td>{{ r.buyRef }}</td>
+                                                    <td>{{ r.eid }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="status" ng-controller="symbolCtrl" ng-show="true">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="symbolModal" class="modal bs-example-modal-sm4" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4>اطلاعات نماد</h4>
+                                    <p>{{ selectedSymbol }}</p>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="status">
+                                                <div class="tablo">
+                                                    <h3 class="title"><i class="fa fa-angle-left  fa-lg"></i>ثبت سفارش فروش سهام</h3>
+
+                                                    <form>
+                                                        <div class="form-horizontal" role="form">
+                                                            <div class="form-group" ng-show="false">
+                                                                <label for="orderSellId" class="col-sm-4 control-label">شناسه کاربر</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="id" id="orderSellId" ng-model="customerId" class="form-control" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا شناسه کاربری را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" ng-show="false">
+                                                                <label for="orderSellInstrument" class="col-sm-4 control-label">نام نماد</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="instrument" id="orderSellInstrument" ng-model="selectedSymbol" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا نام نماد را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="orderSellPrice" class="col-sm-4 control-label">قیمت پیشنهادی</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="price" id="orderSellPrice" ng-model="sellPrc" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا قیمت پیشنهادی را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="orderSellQuantity" class="col-sm-4 control-label">تعداد سهام</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="quantity" id="orderSellQuantity" ng-model="sellQty" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا تعداد سهام را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="orderSellType" class="col-sm-4 control-label">نوع معامله</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="type" id="orderSellType" ng-model="sellTp" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا نوع معامله را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-offset-2 col-sm-10" style="text-align:center">
+                                                                    <button onclick="" id="ContentPlaceHolder1_btn_Save" class="btn btn-success" ng-click="doSell()" ng-show="sellEnable">
+                                                                    ثبت سفارش فروش
+                                                                </button>
+                                                                <button class="btn btn-warning" ng-click="newOrder()" ng-show="!sellEnable">
+                                                                    از نو
+                                                                </button>
+                                                                <span ng-show="!sellEnable" class="bg-info">{{ sellMessage }}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="status">
+                                                <div class="tablo">
+                                                    <h3 class="title"><i class="fa fa-angle-left  fa-lg"></i>ثبت سفارش خرید سهام</h3>
+
+                                                    <form>
+                                                        <div class="form-horizontal" role="form">
+                                                            <div class="form-group" ng-show="false">
+                                                                <label for="orderBuyId" class="col-sm-4 control-label">شناسه کاربر</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="id" id="orderBuyId" ng-model="customerId" class="form-control" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا شناسه کاربری را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" ng-show="false">
+                                                                <label for="orderBuyInstrument" class="col-sm-4 control-label">نام نماد</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="instrument" id="orderBuyInstrument" ng-model="selectedSymbol" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا نام نماد را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="orderBuyPrice" class="col-sm-4 control-label">قیمت پیشنهادی</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="price" id="orderBuyPrice" ng-model="buyPrc" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا قیمت پیشنهادی را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="orderBuyQuantity" class="col-sm-4 control-label">تعداد سهام</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="quantity" id="orderBuyQuantity" ng-model="buyQty" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا تعداد سهام را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="orderBuyType" class="col-sm-4 control-label">نوع معامله</label>
+                                                                <div class="col-sm-6">
+                                                                    <input name="type" id="orderBuyType" ng-model="buyTp" class="form-control" required="required" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا نوع معامله را وارد کنید!')" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-offset-2 col-sm-10" style="text-align:center">
+                                                                    <button id="buy_btn_Save" class="btn btn-success" ng-click="doBuy()" ng-show="buyEnable">
+                                                                    ثبت سفارش خرید
+                                                                </button>
+                                                                 <button class="btn btn-warning" ng-click="newOrder()" ng-show="!buyEnable">
+                                                                    از نو
+                                                                </button>
+                                                                <span ng-show="!buyEnable" class="bg-info">{{ buyMessage }}</span>
+                                                               
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-body">لیست سفارش های فعال
+
+
+                                    <table class="table table-hover table-condensed">
+
+                                        <caption class="bg-success">لیست سفارش های فعال نماد {{ selectedSymbol }}</caption>
+
+                                        <thead>
+                                            <tr>
+                                                <th>ردیف</th>
+                                                <th>کاربر</th>
+                                                <th>قیمت</th>
+                                                <th>تعداد اولیه</th>
+                                                <th>تعداد باقیمانده</th>
+                                                <th>عملیات</th>
+                                                <th>مرجع</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr ng-repeat="r in symbolInfo">
+                                                <td>{{ $index+1 }}</td>
+                                                <td>{{ r.userId }}</td>
+                                                <td>{{ r.price }}</td>
+                                                <td>{{ r.initQuantity }}</td>
+                                                <td>{{ r.remainingQuantity }}</td>
+                                                <td>{{ r.operation }}</td>
+                                                <td>{{ r.oid }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <a id="btn_Cancel" class="btn btn-warning" style="float: right" ng-click="changeData()">انصراف</a>
+                                    <a id="btn_Accept" class="btn btn-danger" style="float: left">تایید</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'include/footer.html'"></div>
+</body>
+
+</html>

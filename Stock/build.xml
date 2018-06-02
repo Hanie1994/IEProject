@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="deploy" name="boors">
+	<property name="junit.lib" value="../common-lib/junit-4.8.1.jar"/>
+	<property name="tomcat.dir" value="/opt/tomcat"/>
+	<property name="deploy.dir" value="${tomcat.dir}/webapps/boors"/>
+
+	<property name="src.dir" value="./src"/>
+	<property name="web.dir" value="./web"/>
+    <property name="lib.dir" value="${web.dir}/WEB-INF/lib"/>
+	<property name="test.dir" value="./test"/>
+
+	<property name="bin.dir" value="./classes"/>
+	<property name="test.bin.dir" value="./test-classes"/>
+	
+	<target name="compile">
+		<mkdir dir="${bin.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${bin.dir}" debug="on" includeantruntime="false" includes="**/*.java">
+			<classpath>
+				<pathelement location="${tomcat.dir}/lib/servlet-api.jar"/>
+				<pathelement location="gson-2.6.2.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="deploy" depends="compile">
+		<mkdir dir="${deploy.dir}"/>
+		<copy todir="${deploy.dir}/WEB-INF/classes">
+			<fileset dir="${bin.dir}"/>
+		</copy>
+		<copy todir="${deploy.dir}">
+			<fileset dir="${web.dir}"/>
+		</copy>
+	</target>
+
+	<target name="clean">
+		<delete dir="${bin.dir}"/>
+		<delete dir="${test.bin.dir}"/>
+		<delete dir="${deploy.dir}" />
+		<delete dir="${tomcat.dir}/work/Catalina"/>
+	</target>
+
+	<target name="touch">
+		<touch file="${deploy.dir}/WEB-INF/web.xml"/>
+	</target>
+
+	<target name="test-compile" depends="compile">
+		<mkdir dir="${test.bin.dir}"/>
+		<javac srcdir="${test.dir}" destdir="${test.bin.dir}" debug="on" includeantruntime="false" includes="**/*.java">
+			<classpath>
+				<pathelement location="${junit.lib}"/>
+                <pathelement location="${bin.dir}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="test" depends="test-compile" >
+	    <junit haltonfailure="no" printsummary="on">
+	    	<classpath>
+				<pathelement location="${junit.lib}"/>
+                <pathelement location="${bin.dir}"/>
+                <pathelement location="${test.bin.dir}"/>
+                <fileset dir="${lib.dir}" includes="mysql*.jar"/>
+            </classpath>
+	        <formatter type="brief" usefile="false"/>
+	        <!--<formatter type="xml" />-->
+
+	        <batchtest>
+	            <fileset dir="${test.bin.dir}" includes="**/*Test.class" excludes="**/*$$*.class"/>
+	        </batchtest>
+	    </junit>
+	</target>
+
+</project>

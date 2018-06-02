@@ -1,0 +1,25 @@
+
+
+<div>
+    <label >محدودیت فعلی: {{ currentUpperBound }}</label>
+</div>
+
+
+
+
+<form>
+    <div class="form-horizontal myTop" role="form">
+        <div class="form-group" ng-show="true">
+            <label for="limit" class="col-sm-4 control-label">محدودیت جدید:</label>
+            <div class="col-sm-6">
+                <input name="id" id="limit" ng-model="customerId" class="form-control" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا مبلغ مورد نظر را وارد کنید!')" type="text">
+                <button id="buy_btn_Save" class="btn btn-success" ng-click="doBuy()">
+                    اعمال
+                </button>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+</form>

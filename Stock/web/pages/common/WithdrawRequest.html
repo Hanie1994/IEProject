@@ -1,0 +1,16 @@
+<form class="myTop">
+    <div class="form-horizontal myTop" role="form">
+        <div class="form-group" ng-show="true">
+            <label for="orderBuyId" class="col-sm-4 control-label">مبلغ مورد نظر :</label>
+            <div class="col-sm-6">
+                <input name="id" id="orderBuyId" ng-model="amount" class="form-control" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا مبلغ مورد نظر را وارد کنید!')" type="text">
+                <button id="buy_btn_Save" class="btn btn-danger" ng-click="doWithdrawRequest(amount)">
+                    کاهش موجودی
+                </button>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+</form>

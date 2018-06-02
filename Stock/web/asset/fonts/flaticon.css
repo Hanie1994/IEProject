@@ -1,0 +1,61 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-calendars16:before {
+	content: "\e000";
+}
+.flaticon-discount5:before {
+	content: "\e001";
+}
+.flaticon-information3:before {
+	content: "\e002";
+}
+.flaticon-logout20:before {
+	content: "\e003";
+}
+.flaticon-magnifyingglass42:before {
+	content: "\e004";
+}
+.flaticon-market1:before {
+	content: "\e005";
+}
+.flaticon-network3:before {
+	content: "\e006";
+}
+.flaticon-newsreport3:before {
+	content: "\e007";
+}
+.flaticon-outcoming1:before {
+	content: "\e008";
+}
+.flaticon-padlock70:before {
+	content: "\e009";
+}
+.flaticon-profile7:before {
+	content: "\e00a";
+}
+.flaticon-question30:before {
+	content: "\e00b";
+}
+.flaticon-speedometer4:before {
+	content: "\e00c";
+}
+.flaticon-telemarketer18:before {
+	content: "\e00d";
+}
+.flaticon-telephone34:before {
+	content: "\e00e";
+}

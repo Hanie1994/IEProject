@@ -1,0 +1,28 @@
+<table class="table table-hover table-condensed">
+    <caption class="bg-info">تعداد درخواست های مالی منتظر تایید: {{ allPendingCreditRequests.length }}</caption>
+    <thead>
+    <tr>
+        <th>ردیف</th>
+        <th>کاربر</th>
+        <th>اعتبار</th>
+        <th>عملیات</th>
+        <th>مرجع</th>
+        <th>تایید</th>
+        <th>رد</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr ng-repeat="r in allPendingCreditRequests">
+        <td>{{ $index+1 }}</td>
+        <td>{{ r.userId }}</td>
+        <td>{{ r.credit }}</td>
+        <td>{{ r.type }}</td>
+        <td>{{ r.crid }}</td>
+        <td ng-click="acceptCreditRequest(r.crid)"><a class="fa fa-check"></a></td>
+        <td ng-click="rejectCreditRequest(r.crid)"><a class="fa fa-close"></a></td>
+    </tr>
+    </tbody>
+</table>

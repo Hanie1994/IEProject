@@ -1,0 +1,120 @@
+<web-app version="2.4"
+ xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" >
+	<servlet>
+		<servlet-name>FrontController</servlet-name>
+		<servlet-class>servlet.FrontController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>FrontController</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/pages/login/403.html</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/login/404.html</location>
+	</error-page>
+
+	<!-- Security Constraints -->
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>AdminArea</web-resource-name>
+			<url-pattern>/CSVBackup.action</url-pattern>
+			<url-pattern>/CustomerList.action</url-pattern>
+			<url-pattern>/Filter.action</url-pattern>
+			<url-pattern>/UserProfile.action</url-pattern>
+			<url-pattern>/MyProfile.action</url-pattern>
+			<url-pattern>/MarketInfo.action</url-pattern>
+			<url-pattern>/ChangeLimit.action</url-pattern>
+			<url-pattern>/AddRole.action</url-pattern>
+			<url-pattern>/PendingSymbols.action</url-pattern>
+			<url-pattern>/VerifySymbol.action</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+		<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>CustomerArea</web-resource-name>
+			<url-pattern>/BuyOrder.action</url-pattern>
+			<url-pattern>/DepositRequest.action</url-pattern>
+			<url-pattern>/MyProfile.action</url-pattern>
+			<url-pattern>/MarketInfo.action</url-pattern>
+			<url-pattern>/SellOrder.action</url-pattern>
+			<url-pattern>/SymbolInfo.action</url-pattern>
+			<url-pattern>/SymbolList.action</url-pattern>
+			<url-pattern>/WithdrawRequest.action</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>customer</role-name>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+		<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>CompanyArea</web-resource-name>
+			<url-pattern>/CompanySymbols</url-pattern>
+			<url-pattern>/MyProfile.action</url-pattern>
+			<url-pattern>/MarketInfo.action</url-pattern>
+			<url-pattern>/ShareHolder.action</url-pattern>
+			<url-pattern>/AddSymbol.action</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>company</role-name>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+		<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>FinancialArea</web-resource-name>
+			<url-pattern>/MyProfile.action</url-pattern>
+			<url-pattern>/MarketInfo.action</url-pattern>
+			<url-pattern>/AcceptCredit.action</url-pattern>
+			<url-pattern>/RejectCredit</url-pattern>
+			<url-pattern>/ActivateLimitedOrder</url-pattern>
+			<url-pattern>/DeclineLimitedOrder</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>financial</role-name>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	
+	<!-- Login config -->
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.jsp</form-login-page>
+			<form-error-page>/pages/login/login-error.html</form-error-page>
+		</form-login-config>
+	</login-config>
+	
+	<!-- Security Roles -->
+	
+	<security-role>
+		<role-name>admin</role-name>
+	</security-role>
+	<security-role>
+		<role-name>customer</role-name>
+	</security-role>
+	<security-role>
+		<role-name>company</role-name>
+	</security-role>
+	<security-role>
+		<role-name>financial</role-name>
+	</security-role>
+
+</web-app>

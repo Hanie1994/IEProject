@@ -1,0 +1,11 @@
+<div class="btn-group btn-group-justified myTop myMargin" ng-init="selected = 0">
+    <a ng-click="selected = 0" class="btn btn-primary">فعال</a>
+    <a ng-click="selected = 1" class="btn btn-success">موفق</a>
+    <a ng-click="selected = -1" class="btn btn-danger">ناموفق</a>
+    <a ng-click="selected = -2" class="btn btn-warning">منتظر تایید</a>
+</div>
+
+<div ng-show="selected == 0" ng-include="'pages/common/ActiveOrders.html'"></div>
+<div ng-show="selected == 1" ng-include="'pages/common/ApprovedOrders.html'"></div>
+<div ng-show="selected == -1" ng-include="'pages/common/DeclinedOrders.html'"></div>
+<div ng-show="selected == -2" ng-include="'pages/common/LimitedOrders.html'"></div>

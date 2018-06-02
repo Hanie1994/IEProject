@@ -1,0 +1,17 @@
+<form>
+    <div class="form-horizontal myTop" role="form">
+        <div class="form-group" ng-show="true">
+            <label for="chargeName" class="col-sm-4 control-label">شناسه کاربر:</label>
+            <div class="col-sm-6">
+                <input name="id" id="chargeName" ng-model="customerId" class="form-control" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا نام نماد مورد نظر را وارد کنید!')" type="text">
+            </div>
+            <label for="chargeAmount" class="col-sm-4 control-label">سطح دسترسی:</label>
+            <div class="col-sm-6">
+                <input name="id" id="chargeAmount" ng-model="customerId" class="form-control" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('لطفا تعداد مورد نظر را وارد کنید!')" type="text">
+                <button id="buy_btn_Save" class="btn btn-success" ng-click="doBuy()">
+                    اعمال
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
